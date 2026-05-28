@@ -1,0 +1,74 @@
+{
+  "name": "helixent",
+  "version": "1.3.1",
+  "publishConfig": {
+    "access": "public"
+  },
+  "registry": "https://registry.npmjs.org",
+  "description": "Helixent is a blue rabbit that writes code. It includes an Agent Loop, a Coding Agent, and a nice CLI.",
+  "author": "Henry Lin <henry1943@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/magiccube/helixent"
+  },
+  "homepage": "https://github.com/magiccube/helixent",
+  "bugs": {
+    "url": "https://github.com/magiccube/helixent/issues"
+  },
+  "keywords": [
+    "agent",
+    "agent-loop",
+    "coding-agent",
+    "cli"
+  ],
+  "bin": {
+    "helixent": "dist/bin/helixent"
+  },
+  "files": [
+    "dist/bin/helixent"
+  ],
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "prepublishOnly": "bun run build:bin",
+    "release:patch": "npm version patch && npm publish",
+    "release:minor": "npm version minor && npm publish",
+    "hooks:install": "git config core.hooksPath .githooks",
+    "build:bin": "rm -rf dist/bin && bun build index.ts --compile --outfile dist/bin/helixent",
+    "build:js": "rm -rf dist/js && bun build ./index.ts --outdir ./dist/js --splitting --target bun",
+    "check": "tsc --noEmit && eslint . --ext .ts && bun test",
+    "check:types": "tsc --noEmit",
+    "dev": "bun run index.ts",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.0",
+    "@types/bun": "latest",
+    "@types/react": "^19.2.14",
+    "eslint": "^10.0.2",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-import-x": "^4.16.1",
+    "prettier": "^3.8.1",
+    "react-devtools-core": "^7.0.1",
+    "typescript-eslint": "^8.56.1"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.87.0",
+    "commander": "^14.0.3",
+    "gray-matter": "^4.0.3",
+    "ink": "^6.8.0",
+    "ink-markdown": "^1.0.4",
+    "ink-spinner": "^5.0.0",
+    "ink-text-input": "^6.0.0",
+    "marked-terminal": "^7.3.0",
+    "openai": "^6.33.0",
+    "react": "^19.2.4",
+    "yaml": "^2.8.3",
+    "zod": "^4.3.6"
+  }
+}
